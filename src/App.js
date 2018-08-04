@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import './App.css';
+import Movie from './Movie';
 
 class App extends Component {
   constructor(props)
@@ -17,18 +18,19 @@ class App extends Component {
     Axios.get(`${baseUrl}movie/popular?api_key=${apiKey}&language=en-US&page=1`)
     .then(res =>
     {
-      console.log(res.data.results);
+      
       this.setState({
         movies: res.data.results
       });
     });
+    
   }
   render() {
     return (
       <div className="App">
         { 
           this.state.movies.map(movie => {
-            return <h1>{movie.title}</h1>;
+            return <Movie key={movie.id} id={movie.id}/>;
           })
           }
       </div>
